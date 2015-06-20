@@ -8,7 +8,28 @@
 </head>
 <body class="<%= controller.controller_name %>">
 <div class="container">
-	<%= yield %>
+	<div class="row header">
+		<div class="col-md-2">
+			<%= image_tag("logo.png") %>
+		</div>
+		<div class="col-md-10">
+			<h2><%= @page_title || "Program Bookshelf" %></h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2 side">
+			<h4>Our Store</h4>	
+			<ul>
+				<li>Home</li>
+				<li>Question</li>
+				<li>News</li>
+				<li>Contact</li>
+			</ul>
+		</div>
+		<div class="col-md-10 main">
+			<%= yield %>
+		</div>
+	</div>
 </div>
 </body>
 </html>
