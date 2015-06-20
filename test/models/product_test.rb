@@ -47,4 +47,26 @@ class ProductTest < ActiveSupport::TestCase
 			assert new_product(name).invalid?, "#{name}, shouldn't be valid}"
 		end
 	end
+
+	fixtures :products
+	
+	test "product is not valid without a unique title" do
+		product = Product.new(title:products(:one).title,
+			description: "yyy",
+			image_url: "lorem.gif",
+			price: 1
+		)
+	assert product.invalid?
+	assert_equal ["has already been taken"], product.errors[:title]
+	end
+	
+	# test "product is not valid without a unique title - i18n" do
+	# 	product = Product.new(title:products(:two).title,
+	# 		description: "yyy",
+	# 		image_url: "lorem.gif",
+	# 		price: 1
+	# 	)
+	# assert product.invalid?
+	# assert_equal [I18n.translate('errors.message.taken')], product.errors[:title]
+	# end
 end
