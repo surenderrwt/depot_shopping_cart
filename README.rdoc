@@ -20,6 +20,10 @@ rails g scaffold Product \
 title:string description:text image_url:string price:decimal
 rake db:migrate
 
+* Cart
+rails g scaffold Cart
+rake db:migrate
+
 
 * Database initialization
 
@@ -35,7 +39,8 @@ rake db:migrate
 * Pages
 /products
 /store
-
+/carts
+/line_items
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.

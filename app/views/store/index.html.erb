@@ -1,27 +1,25 @@
 <% if notice %>
 	<p id="notice"><%= notice %></p>
 <% end%>
-<h4>Your Pragmatic Catalog</h4>
-
-<div class="entry">
-	<table class="table table-bordered">
-		<% @products.each do |product| %>
-		<thead>
-			<tr>
-				<th>Image</th>
-				<th>Title</th>
-				<th>Description</th>
-				<th>Price</th>
-			</tr>
-		</thead>
-		<tr>
-			<td><%= image_tag(product.image_url) %></td>
-			<td><%= product.title %></td>
-			<td><%= sanitize(product.description) %></td>
-			<td><span class="price"><%= number_to_currency(product.price) %></span></td>
-		</tr>
+<% cache ['store', Product.last] do %>
+	<% @products.each do |product| %>
+		<% cache ['entry', product] do %>
+	<div class="row product-margin	">
+		<div class="col-md-2">
+			<%= image_tag(product.image_url) %>
+		</div>
+		<div class="col-md-10">
+			<div class="product-block">
+				<%= product.title %>
+				<%= sanitize(product.description) %>
+			</div>
+			<div class="product-inline">
+				<span><%= number_to_currency(product.price) %></span>
+				<span><%= button_to 'Add to Cart', line_items_path(product_id: product), class: 'btn btn-primary'%></span>
+			</div>
+		</div>
+	</div>
 		<% end %>
-	</table>
-</div>	
-
+	<% end %>
+<% end %>
 
