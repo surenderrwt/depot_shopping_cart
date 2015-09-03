@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Products</h1>
+<h3>Products</h3>
 
-<table>
+<table class="table">
     <% @products.each do |product| %>
       <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
         <td>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Product', new_product_path %>
+<%= link_to 'New Product', new_product_path, class: 'btn btn-primary' %>
