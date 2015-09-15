@@ -33,7 +33,7 @@ class LineItemsController < ApplicationController
       if @line_item.save
         # format.html { redirect_to root_path }
         # use of Ajax
-        format.js
+        format.js { @current_item = @line_item }
         format.xml { render :xml => @line_item, :status => :created, :location => @line_item }
       else
         format.html { render :action => "new" }
