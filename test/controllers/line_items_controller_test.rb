@@ -21,7 +21,7 @@ class LineItemsControllerTest < ActionController::TestCase
       post :create, prduct_id: products(:ruby).id
     end
 
-    assert_redirected_to line_item_path(assigns(:line_item).cart)
+    assert_redirected_to root_path
   end
 
   test "should show line_item" do
