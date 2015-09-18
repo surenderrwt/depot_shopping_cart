@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :pages
+  resources :posts
+  resources :orders
   resources :line_items
   resources :carts
   get 'store/index'
