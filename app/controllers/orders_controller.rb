@@ -31,19 +31,21 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    @order.add_line_items_from_cart(current_cart)
-
+    @order.add_line_items_from_cart(@cart)
+ 
     respond_to do |format|
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
-
-        format.html { redirect_to root_path, notice: 'Thank your order!' }
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
+        format.html { redirect_to(root_path, :notice => 
+          'Thank you for your order.') }
+        format.xml  { render :xml => @order, :status => :created,
+          :location => @order }
       else
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+        # @cart = current_cart
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @order.errors,
+          :status => :unprocessable_entity }
       end
     end
   end
