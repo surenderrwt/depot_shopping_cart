@@ -61,6 +61,17 @@ class ProductsController < ApplicationController
     end
   end
 
+  # atom feeds
+  def who_bought
+    @product = Product.find(params[:id])
+    @latest_order @product.orders.order(:updated_at).latest_order
+    if slate?(@latest_order)
+      respond_to do |format|
+        format.atom
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
