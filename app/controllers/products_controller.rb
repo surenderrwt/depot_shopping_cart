@@ -64,8 +64,8 @@ class ProductsController < ApplicationController
   # atom feeds
   def who_bought
     @product = Product.find(params[:id])
-    @latest_order @product.orders.order(:updated_at).latest_order
-    if slate?(@latest_order)
+    @latest_order = @product.orders.order(:updated_at).last
+    if stale?(@latest_order)
       respond_to do |format|
         format.atom
       end
