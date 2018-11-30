@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
 	def ensure_not_referenced_by_any_line_item
 		if line_items.emty?
 			return true
-		esle
+		else
 			errors.add(:base, 'Line Items present')
 			return false
 		end
